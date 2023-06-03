@@ -1,16 +1,14 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar, Linking } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
 
 const SignInScreen = ({ navigation }) => {
   const handleSignIn = () => {
     // Add authentication logic or actions after successful sign in
-    console.log("Sign In pressed");
+    
+    // Navigate to the Home screen
+    navigation.navigate('Home');
   };
 
-  const handleFacebookSignIn = () => {
-    // Open the Facebook app
-    Linking.openURL('fb://');
-  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +30,7 @@ const SignInScreen = ({ navigation }) => {
       <Text style={styles.textLink} onPress={() => navigation.navigate('SignUp')}>
         Tidak punya akun? <Text style={styles.daftarText}>Daftar</Text>
       </Text>
-      <TouchableOpacity style={[styles.buttonContainer, { marginTop: 50, backgroundColor: '#3E5C9A' }]} onPress={handleFacebookSignIn}>
+      <TouchableOpacity style={[styles.buttonContainer, { marginTop: 50, backgroundColor: '#3E5C9A' }]}>
         <Text style={styles.buttonText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: '#FFFFFF' }]} onPress={handleSignIn}>
