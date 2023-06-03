@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet, Image, StatusBar, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, StatusBar, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import ChatScreen from './ChatScreen';
 import HistoryScreen from './HistoryScreen';
 import ProfileScreen from './ProfileScreen';
@@ -18,72 +18,109 @@ const HomeScreen = () => {
   return (
     <React.Fragment>
       <StatusBar backgroundColor={'#5F84A1'} barStyle={'dark-content'} />
-      <View style={styles.container}>
-        <View style={styles.rectangle}>
-          <View style={styles.rowContainer}>
-            <Image source={require('../images/Avatar.png')} style={styles.Avatar} />
-            <Text style={styles.text}>
-              Hallo, Welcome{'\n'}
-              <Text style={styles.boldText}>Muhammad Fauzan</Text>
-            </Text>
-            <Image source={require('../images/Notifications.png')} style={styles.Notification} />
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.rectangle}>
+            <View style={styles.rowContainer}>
+              <Image source={require('../images/Avatar.png')} style={styles.avatar} />
+              <Text style={styles.text}>
+                Hallo, Welcome{'\n'}
+                <Text style={styles.boldText}>Muhammad Fauzan</Text>
+              </Text>
+              <Image source={require('../images/Notifications.png')} style={styles.notification} />
+            </View>
+            <View style={styles.inputContainer}>
+              <FontAwesomeIcon icon={faSearch} style={styles.searchIcon} />
+              <TextInput
+                style={[styles.input, { paddingLeft: '12.5%', color: '#FFFFFF' }]}
+                placeholder="Search..."
+                placeholderTextColor="#FFFFFF"
+                value={searchText}
+                onChangeText={(text) => setSearchText(text)}
+              />
+            </View>
           </View>
-          <View style={styles.inputContainer}>
-            <FontAwesomeIcon icon={faSearch} style={styles.searchIcon} />
-            <TextInput
-              style={[styles.input, { paddingLeft: '12.5%', color: '#FFFFFF' }]}
-              placeholder="Search..."
-              placeholderTextColor="#FFFFFF"
-              value={searchText}
-              onChangeText={(text) => setSearchText(text)}
-            />
+          <View style={styles.contentContainer}>
+            <Text style={styles.subtitle}>Fitur</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Toko Kesehatan')}>
+                <Image source={require('../images/tokoKesehatan.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Toko Kesehatan</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Konsultasi Dokter')}>
+                <Image source={require('../images/konsultasiDokter.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Konsultasi Dokter</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Diagnosa Laboratorium')}>
+                <Image source={require('../images/diagnosaLaboratorium.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Diagnosa Laboratorium</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Donor Darah')}>
+                <Image source={require('../images/donorDarah.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Donor Darah</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Ambulance')}>
+                <Image source={require('../images/ambulance.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Ambulance</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Vaksinasi dan Imunisasi')}>
+                <Image source={require('../images/vaksinasiImunisasi.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Vaksinasi dan Imunisasi</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Artikel Kesehatan')}>
+                <Image source={require('../images/artikelKesehatan.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Artikel Kesehatan</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Fitur Lainnya')}>
+                <Image source={require('../images/fiturLainnya.png')} style={styles.featureIcon} />
+                <Text style={styles.featureName}>Fitur Lainnya</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={[styles.subtitle, { marginTop: 0 }]}>Berita</Text>
+            <View style={styles.newsRectangle}>
+              <View style={styles.rowContainer2}>
+                <Image source={require('../images/fotoArtikel.png')} style={styles.artikel} />
+                <View style={styles.newsContent}>
+                  <Text style={styles.newsHeadline}>
+                    Gejala Covid-19: Kenali{'\n'}
+                    Tanda-tandanya untuk{'\n'}
+                    Perlindungan Diri
+                  </Text>
+                  <TouchableOpacity style={styles.readMoreButton}>
+                    <Text style={styles.readMoreText}>Baca Selengkapnya</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <Text style={[styles.subtitle, { marginTop: 16 }]}>Janji Mendatang</Text>
+            <View style={styles.janjiRectangle}>
+              <View style={styles.rowContainer2}>
+                <View style={styles.detailJanjiRectangle}>
+                  <Text style={styles.detailJanjiHeadline}>
+                    29 Mei{'\n'}
+                    <Text style={{ fontSize: 20 }}>Mon</Text>
+                  </Text>
+                </View>
+                <View style={{marginLeft:16}}>
+                <Text>
+                  <Text style={styles.time}>14:00 PM{'\n'}{'\n'}</Text>
+                  <Text style={styles.doctor}>dr. Giovanni Nathaniel Sp.OG{'\n'}</Text>
+                  <Text style={styles.specialization}>{'\n'}Sp. Kandungan dan Kebidanan</Text>
+                </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
-        <Text style={styles.subtitle}>Fitur</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 1')}>
-            <Image source={require('../images/tokoKesehatan.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Toko Kesehatan</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 2')}>
-            <Image source={require('../images/konsultasiDokter.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Konsultasi Dokter</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 3')}>
-            <Image source={require('../images/diagnosaLaboratorium.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Diagnosa Laboratorium</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 4')}>
-            <Image source={require('../images/donorDarah.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Donor Darah</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 1')}>
-            <Image source={require('../images/ambulance.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Ambulance</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 2')}>
-            <Image source={require('../images/vaksinasiImunisasi.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Vaksinasi dan Imunisasi</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 3')}>
-            <Image source={require('../images/artikelKesehatan.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Artikel Kesehatan</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Feature 4')}>
-            <Image source={require('../images/fiturLainnya.png')} style={styles.featureIcon} />
-            <Text style={styles.featureName}>Fitur Lainnya</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={[styles.subtitle, { marginTop: 0 }]}>Berita</Text>
-        <View style={styles.newsRectangle}>
-           <Image source={require('../images/fotoArtikel.png')} style={styles.artikel} />
-        </View>
-      </View>
+      </ScrollView>
     </React.Fragment>
   );
-  }; 
+};
+
+
+
 
 const Tab = createBottomTabNavigator();
 
@@ -169,7 +206,7 @@ const styles = StyleSheet.create({
   rectangle: {
     width: '100%',
     alignSelf: 'stretch', // Adjust the width to stretch across the screen
-    height: 165,
+    height: 160,
     backgroundColor: '#5F84A1',
     justifyContent: 'center',
     alignItems: 'center',
@@ -179,7 +216,11 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom:10
+  },
+  rowContainer2: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     color: '#FFFFFF',
@@ -225,7 +266,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   button: {
-    marginHorizontal:8,
+    marginHorizontal: 8,
     width: '20%',
     height: '20%',
     aspectRatio: 1,
@@ -249,22 +290,94 @@ const styles = StyleSheet.create({
     color:'#000000',
   },
   newsRectangle: {
-    width: '91%',
+    width: 350,
     alignSelf: 'center', // Center the rectangle horizontally
     height: 165,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 20, // Add paddingTop to create space between container and rectangle
     backgroundColor: '#4F1717',
-    borderRadius:24,
+    borderRadius: 24,
   },
-  artikel: {
+  janjiRectangle: {
+    width: 350,
+    alignSelf: 'center', // Center the rectangle horizontally
+    height: 165,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#5F84A1',
+    borderRadius: 24,
+    marginBottom:40,
+  },
+  detailJanjiRectangle: {
+    width: 120,
+    height:120,
     alignSelf: 'center', // Center the rectangle horizontally
     justifyContent: 'center',
     alignItems: 'center',
-    width:100,
-    height:100,
-  }
+    backgroundColor: '#22313F',
+    borderRadius: 24,
+    // marginLeft: 16,
+  },
+  artikel: {
+    alignSelf: 'flex-start', // Align the rectangle to the left
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 120,
+    height: 120,
+    marginLeft: 16, // Move the component to the right by 16 units
+  },
+  newsContent: {
+    flex: 1,
+    marginLeft: 16,
+  },
+  newsHeadline: {
+    fontFamily: 'Poppins-Regular',
+    color: '#FFFFFF',
+    fontSize: 12,
+    marginBottom: 28,
+  },
+  detailJanjiHeadline: {
+    fontFamily: 'Poppins-ExtraBold',
+    color: '#FFFFFF',
+    fontSize: 12,
+  },
+  readMoreButton: {
+    alignSelf: 'flex-start',
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+  },
+  readMoreText: {
+    fontFamily: 'Poppins-Medium',
+    color: '#4F1717',
+    fontSize: 9,
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    marginRight: 12,
+  },
+  notification: {
+    width: 32,
+    height: 32,
+    marginLeft: 48,
+  },
+  time: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 15,
+    color:'#FFFFFF',
+
+  },
+  doctor: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 12,
+    color:'#FFFFFF'
+  },
+  specialization: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 12,
+    color:'#FFFFFF',
+  },
 });
 
 export default HomeTabNavigator;
