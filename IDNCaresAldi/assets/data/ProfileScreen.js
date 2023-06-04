@@ -4,8 +4,9 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('../images/profile.png')} style={styles.logo} />
-      <Text style={styles.title}>Profile belum</Text>
+      <View style={styles.rectangle}>
+        <View style={styles.rectangle2}></View>
+      </View>
     </View>
   );
 };
@@ -13,14 +14,27 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align container content from the top
     alignItems: 'center',
     backgroundColor: '#ffffff',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
+  rectangle: {
+    width: 360,
+    alignSelf: 'center', // Align the rectangle to the top
+    height: 180,
+    backgroundColor: '#5F84A1',
+    justifyContent: 'flex-end', // Align the content at the bottom
+    alignItems: 'center',
+    paddingTop: 20,
+    borderRadius: 16,
+    marginTop: 20,
+  },
+  rectangle2: {
+    width: '100%', // Set the width to 100% to match the parent rectangle
+    height: 50,
+    backgroundColor: '#EBEBEB', // Example color for rectangle2
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
   },
   logo: {
     width: 30,
