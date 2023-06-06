@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const SignUpScreen = ({ navigation }) => {
   const handleSignUp = () => {
@@ -9,64 +9,76 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.rectangle} />
-      <Text style={styles.title}>Sign Up</Text>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Email" />
+      <View style={styles.rectangle}>
+        <Text style={styles.title}>Sign Up</Text>
+        <ScrollView contentContainerStyle={styles.container2}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput style={styles.input} placeholder="Masukkan Email" />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput style={styles.input} placeholder="Masukkan Password" secureTextEntry />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Nama Lengkap</Text>
+          <TextInput style={styles.input} placeholder="Masukkan Nama Lengkap" />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Tanggal Lahir</Text>
+          <TextInput style={styles.input} placeholder="Masukkan Tanggal Lahir" />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>NIK</Text>
+          <TextInput style={styles.input} placeholder="Masukkan NIK" />
+        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Saya Setuju</Text>
+        </TouchableOpacity>
+        <Text style={styles.textLink} onPress={() => navigation.navigate('SignIn')}>
+          Sudah punya akun? <Text style={styles.daftarText}>Sign In</Text>
+        </Text>
+        </ScrollView>
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Password" secureTextEntry />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Nama Lengkap</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Nama Lengkap" />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Tanggal Lahir</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Tanggal Lahir" />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>NIK</Text>
-        <TextInput style={styles.input} placeholder="Masukkan NIK" />
-      </View>
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Saya Setuju</Text>
-      </TouchableOpacity>
-      <Text style={styles.textLink} onPress={() => navigation.navigate('SignIn')}>
-        Sudah punya akun? <Text style={styles.daftarText}>Sign In</Text>
-      </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#97BAE0',
+    paddingVertical: 150,
+  },
+  container2: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#97BAE0',
+    backgroundColor: '#FFFFFF',
+    // paddingVertical: 150,
   },
   rectangle: {
-    position: 'absolute',
-    top: '10%',
-    width: 400,
-    height: 800,
-    borderRadius: 50,
+    width: '100%',
+    alignSelf: 'stretch',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     backgroundColor: '#FFFFFF',
+    paddingHorizontal: 40,
+    paddingBottom: 40,
   },
   title: {
     color: '#000000',
     fontSize: 26,
-    top: '2.5%',
+    marginTop: 16,
     fontFamily: 'Poppins-Medium',
     marginBottom: 20,
+    textAlign: 'center',
   },
   inputContainer: {
     width: '100%',
-    marginBottom: 4,
+    marginBottom: 10,
   },
   label: {
     color: '#000000',
@@ -84,6 +96,7 @@ const styles = StyleSheet.create({
   textLink: {
     color: '#787878',
     fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
   },
   daftarText: {
     color: '#000000',
@@ -95,14 +108,16 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#22313F',
     justifyContent: 'center',
-    alignItems: 'center',
-    height: 40,
+    alignSelf: 'center',
+    height: 60,
     elevation: 3,
+    paddingHorizontal: 40,
   },
   buttonText: {
     fontSize: 16,
     color: '#FFFFFF',
     fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
   },
 });
 

@@ -18,7 +18,7 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: 'HomeScreen' }} />
         <Stack.Screen name="Chat" component={ChatScreen} options={{ title: 'Chat' }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ title: 'History' }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />

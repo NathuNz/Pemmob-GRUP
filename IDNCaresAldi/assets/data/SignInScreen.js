@@ -6,15 +6,15 @@ const SignInScreen = ({ navigation }) => {
     // Add authentication logic or actions after successful sign in
     
     // Navigate to the Home screen
-    navigation.navigate('Home');
+    navigation.navigate('HomeScreen');
   };
 
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#97BAE0" barStyle="dark-content" />
-      <View style={styles.rectangle} />
       <Image source={require('../images/logoApp.png')} style={styles.logo} />
+      <View style={styles.rectangle}>
       <Text style={styles.title}>Sign In</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
@@ -36,6 +36,7 @@ const SignInScreen = ({ navigation }) => {
       <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: '#FFFFFF' }]} onPress={handleSignIn}>
         <Text style={[styles.buttonText, { color: '#22313F' }]}>Google</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -43,29 +44,31 @@ const SignInScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 20,
     backgroundColor: '#97BAE0',
   },
   rectangle: {
     position: 'absolute',
-    top: '23%',
-    width: 400,
-    height: 700,
+    width: '100%',
+    alignSelf: 'stretch',
+    height: '100%',
     borderRadius: 50,
+    marginTop: 150,
     backgroundColor: '#FFFFFF',
   },
   title: {
     color: '#000000',
     fontSize: 26,
-    top: '2.5%',
+    marginTop:16,
     fontFamily: 'Poppins-Medium',
     marginBottom: 20,
+    textAlign:'center',
   },
   inputContainer: {
     width: '100%',
     marginBottom: 10,
+    paddingHorizontal: 40,
   },
   label: {
     color: '#000000',
@@ -84,6 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     color: '#787878',
     fontFamily: 'Poppins-Regular',
+    textAlign:'center',
   },
   daftarText: {
     color: '#000000',
@@ -92,22 +96,24 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    marginBottom: 20,
+    marginTop:24,
   },
   buttonContainer: {
-    width: '100%',
+    width: '80%',
     marginBottom: 10,
     borderRadius: 12,
     backgroundColor: '#22313F',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: 'center',
     height: 60,
     elevation: 3,
+    paddingHorizontal: 40,
   },
   buttonText: {
     fontSize: 18,
     color: '#FFFFFF',
     fontFamily: 'Poppins-Regular',
+    textAlign:'center',
   },
 });
 
