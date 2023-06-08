@@ -17,8 +17,8 @@ const SignInScreen = ({ navigation }) => {
       <View style={styles.rectangle}>
       <Text style={styles.title}>Sign In</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Email" />
+        <Text style={styles.label}>Username</Text>
+        <TextInput style={styles.input} placeholder="Masukkan Username" />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
