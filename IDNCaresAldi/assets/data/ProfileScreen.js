@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const ProfileScreen = ({ navigation }) => {
   const handleLogOut = () => {
@@ -16,7 +16,10 @@ const ProfileScreen = ({ navigation }) => {
           <View style={styles.rowContainer}>
             <Image source={require('../images/Avatar.png')} style={styles.avatar} />
             <View style={styles.column}>
-              <Text style={styles.boldText}>Muhammad Fauzan</Text>
+              <View style={styles.rowContainer}>
+                <Text style={styles.boldText}>Muhammad Fauzan</Text>
+                <Image source={require('../images/profileButton/edit.png')} style={styles.editIcon} />
+              </View>
               <View style={styles.rowContainer}>
                 <Image source={require('../images/profileButton/Vector.png')} style={styles.icon1} />
                 <Text style={styles.text}>+62 857-3261-3129</Text>
@@ -87,6 +90,7 @@ const ProfileScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -170,7 +174,6 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     marginRight: 4,
-    color:'#000000'
   },
   icon2: {
     width: 12.73,
@@ -180,6 +183,7 @@ const styles = StyleSheet.create({
   icon3:{
     width:35,
     height:35,
+    marginLeft:10
   },
   icon4: {
     width: 18,
@@ -211,7 +215,12 @@ const styles = StyleSheet.create({
   back:{
     width:14,
     height:14,
-  }
+  },
+  editIcon:{
+    width:28,
+    height:28,
+    marginLeft:80,
+  },
 });
 
 export default ProfileScreen;
