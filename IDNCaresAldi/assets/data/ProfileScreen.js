@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { N } from './SignInScreen';
+import { NIK } from './SignInScreen';
 
 const ProfileScreen = ({ navigation }) => {
   const handleLogOut = () => {
@@ -17,7 +19,7 @@ const ProfileScreen = ({ navigation }) => {
             <Image source={require('../images/Avatar.png')} style={styles.avatar} />
             <View style={styles.column}>
               <View style={styles.rowContainer}>
-                <Text style={styles.boldText}>Muhammad Fauzan</Text>
+                <Text style={styles.boldText}>{N}</Text>
                 <Image source={require('../images/profileButton/edit.png')} style={styles.editIcon} />
               </View>
               <View style={styles.rowContainer}>
@@ -26,7 +28,7 @@ const ProfileScreen = ({ navigation }) => {
               </View>
               <View style={styles.rowContainer}>
                 <Image source={require('../images/profileButton/Union.png')} style={styles.icon2} />
-                <Text style={styles.text}>3203011805900011</Text>
+                <Text style={styles.text}>{NIK}</Text>
               </View>
             </View>
           </View>

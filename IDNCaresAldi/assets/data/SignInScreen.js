@@ -1,41 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
+import { app, db, getFirestore, collection, addDoc, getDocs, where, query } from './index';
+
+export let N = '';
+export let NIK = '';
 
 const SignInScreen = ({ navigation }) => {
-  const handleSignIn = () => {
-    // Add authentication logic or actions after successful sign in
-    
-    // Navigate to the Home screen
-    navigation.navigate('HomeScreen');
-  };
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPass, setLoginPass] = useState("");
 
+  const getSesuatu = async () => {
+    const emailQuery = query(collection(db, 'users'), where('Username', '==', loginUsername));
+    const emailSnapshot = await getDocs(emailQuery);
+
+
+  if (emailSnapshot.size > 0) {
+    const userDoc = emailSnapshot.docs[0];
+    const userPassword = userDoc.get('Password');
+
+    if (userPassword === loginPass) {
+      console.log('Username and password match');
+      N = userDoc.get('Nama');
+      NIK = userDoc.get('NIK');
+      navigation.navigate('HomeScreen');
+      setLoginPass('');
+      setLoginUsername('');
+      console.log(N);
+
+    } else {
+      console.log('Password is incorrect');
+      setLoginPass('')
+    }
+  } else {
+    console.log('Username not found');
+    setLoginPass('');
+    setLoginUsername('');
+  }
+}
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#97BAE0" barStyle="dark-content" />
       <Image source={require('../images/logoApp.png')} style={styles.logo} />
       <View style={styles.rectangle}>
-      <Text style={styles.title}>Sign In</Text>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Username" />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput style={styles.input} placeholder="Masukkan Password" secureTextEntry />
-      </View>
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <Text style={styles.textLink} onPress={() => navigation.navigate('SignUp')}>
-        Tidak punya akun? <Text style={styles.daftarText}>Daftar</Text>
-      </Text>
-      <TouchableOpacity style={[styles.buttonContainer, { marginTop: 50, backgroundColor: '#3E5C9A' }]}>
-        <Text style={styles.buttonText}>Facebook</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: '#FFFFFF' }]} onPress={handleSignIn}>
-        <Text style={[styles.buttonText, { color: '#22313F' }]}>Google</Text>
-      </TouchableOpacity>
+        <Text style={styles.title}>Sign In</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Username</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Masukkan Username"
+            value={loginUsername} 
+            onChangeText={(Text) => setLoginUsername(Text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Masukkan Password"
+            secureTextEntry
+            value={loginPass}
+            onChangeText={(Text) => setLoginPass(Text)}
+          />
+        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={getSesuatu}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <Text style={styles.textLink} onPress={() => navigation.navigate('SignUp')}>
+          Tidak punya akun? <Text style={styles.daftarText}>Daftar</Text>
+        </Text>
+        <TouchableOpacity style={[styles.buttonContainer, { marginTop: 50, backgroundColor: '#3E5C9A' }]}>
+          <Text style={styles.buttonText}>Facebook</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: '#FFFFFF' }]} onPress={getSesuatu}>
+          <Text style={[styles.buttonText, { color: '#22313F' }]}>Google</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -60,10 +99,10 @@ const styles = StyleSheet.create({
   title: {
     color: '#000000',
     fontSize: 26,
-    marginTop:16,
+    marginTop: 16,
     fontFamily: 'Poppins-Medium',
     marginBottom: 20,
-    textAlign:'center',
+    textAlign: 'center',
   },
   inputContainer: {
     width: '100%',
@@ -87,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     color: '#787878',
     fontFamily: 'Poppins-Regular',
-    textAlign:'center',
+    textAlign: 'center',
   },
   daftarText: {
     color: '#000000',
@@ -96,7 +135,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    marginTop:24,
+    marginTop: 24,
   },
   buttonContainer: {
     width: '80%',
@@ -113,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
     fontFamily: 'Poppins-Regular',
-    textAlign:'center',
+    textAlign: 'center',
   },
 });
 

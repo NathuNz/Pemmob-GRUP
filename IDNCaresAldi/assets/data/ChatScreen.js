@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { N } from './SignInScreen';
 
 const ChatScreen = () => {
   return (
@@ -9,7 +10,7 @@ const ChatScreen = () => {
           <Image source={require('../images/Avatar.png')} style={styles.Avatar} />
           <Text style={styles.text1}>
             Hallo, Welcome{'\n'}
-            <Text style={styles.boldText1}>Muhammad Fauzan</Text>
+            <Text style={styles.boldText1}>{N}</Text>
           </Text>
           <Image source={require('../images/Notifications.png')} style={styles.notification} />
         </View>

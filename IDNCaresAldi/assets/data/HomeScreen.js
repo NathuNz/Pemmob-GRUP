@@ -6,6 +6,8 @@ import HistoryScreen from './HistoryScreen';
 import ProfileScreen from './ProfileScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { N } from './SignInScreen';
+
 
 const HomeScreen = () => {
   const [searchText, setSearchText] = useState('');
@@ -14,6 +16,7 @@ const HomeScreen = () => {
     // Perform action based on the selected feature
     console.log('Selected feature:', feature);
   };
+
 
   return (
     <React.Fragment>
@@ -25,7 +28,7 @@ const HomeScreen = () => {
               <Image source={require('../images/Avatar.png')} style={styles.avatar} />
               <Text style={styles.text}>
                 Hallo, Welcome{'\n'}
-                <Text style={styles.boldText}>Muhammad Fauzan</Text>
+                <Text style={styles.boldText}>{N}</Text>
               </Text>
               <Image source={require('../images/Notifications.png')} style={styles.notification} />
             </View>

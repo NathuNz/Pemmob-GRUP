@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { app, db, getFirestore, collection, addDoc } from './index';
 
 const SignUpScreen = ({ navigation }) => {
-  const handleSignUp = () => {
-    // Add sign up logic or actions
-    console.log("Sign Up pressed");
+  const [regisNama, setRegisNama] = useState("");
+  const [regisUsername, setRegisUsername] = useState("");
+  const [regisPass, setRegisPass] = useState("");
+  const [regisNIK, setRegisNIK] = useState("");
+
+  const AddSesuatu = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        Nama: regisNama,
+        Username: regisUsername,
+        Password: regisPass,
+        NIK: regisNIK
+      });
+      console.log("Document written with ID: ", docRef.id);
+      navigation.navigate('SignIn');
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   };
 
   return (
@@ -12,32 +28,49 @@ const SignUpScreen = ({ navigation }) => {
       <View style={styles.rectangle}>
         <Text style={styles.title}>Sign Up</Text>
         <ScrollView contentContainerStyle={styles.container2}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Username</Text>
-          <TextInput style={styles.input} placeholder="Masukkan Username" />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Password</Text>
-          <TextInput style={styles.input} placeholder="Masukkan Password" secureTextEntry />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Nama Lengkap</Text>
-          <TextInput style={styles.input} placeholder="Masukkan Nama Lengkap" />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Tanggal Lahir</Text>
-          <TextInput style={styles.input} placeholder="Masukkan Tanggal Lahir" />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>NIK</Text>
-          <TextInput style={styles.input} placeholder="Masukkan NIK" />
-        </View>
-        <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Saya Setuju</Text>
-        </TouchableOpacity>
-        <Text style={styles.textLink} onPress={() => navigation.navigate('SignIn')}>
-          Sudah punya akun? <Text style={styles.daftarText}>Sign In</Text>
-        </Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Username</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Masukkan Username"
+              value={regisUsername}
+              onChangeText={(Text) => setRegisUsername(Text)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Masukkan Password"
+              secureTextEntry
+              value={regisPass}
+              onChangeText={(Text) => setRegisPass(Text)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Nama Lengkap</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Masukkan Nama Lengkap"
+              value={regisNama}
+              onChangeText={(Text) => setRegisNama(Text)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>NIK</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Masukkan NIK"
+              value={regisNIK}
+              onChangeText={(Text) => setRegisNIK(Text)}
+            />
+          </View>
+          <TouchableOpacity style={styles.buttonContainer} onPress={AddSesuatu}>
+            <Text style={styles.buttonText}>Saya Setuju</Text>
+          </TouchableOpacity>
+          <Text style={styles.textLink} onPress={() => navigation.navigate('SignIn')}>
+            Sudah punya akun? <Text style={styles.daftarText}>Sign In</Text>
+          </Text>
         </ScrollView>
       </View>
     </View>
@@ -46,7 +79,7 @@ const SignUpScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#97BAE0',
@@ -57,7 +90,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    // paddingVertical: 150,
   },
   rectangle: {
     width: '100%',
